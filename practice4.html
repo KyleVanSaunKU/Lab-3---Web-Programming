@@ -1,114 +1,33 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8" />
-  <title>Practice 4 — Multiplication Table</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Multiplication Table</title>
   <style>
-    body { font-family: Arial, sans-serif; margin: 1.5rem; }
-    form { margin-bottom: 1rem; }
-    table { border-collapse: collapse; margin-top: 1rem; max-width: 100%; overflow:auto; }
-    th, td { padding: 6px 8px; border: 1px solid #ccc; text-align: center; }
-    th { background: #f0f0f0; font-weight: 600; position: sticky; top: 0; }
-    .notice { margin-top: .5rem; color:#555; font-size: .9rem; }
-    @media (max-width:600px){
-      th, td { padding: 4px 6px; font-size: 0.9rem; }
-    }
+    table, td, th { border:1px solid black; border-collapse:collapse; padding:5px; }
   </style>
 </head>
 <body>
-  <h1>Multiplication Table</h1>
-
-  <form id="tableForm" onsubmit="return false;" aria-label="Multiplication table controls">
-    <label>
-      Show table up to:
-      <input id="nInput" name="n" type="number" min="1" max="100" value="10" />
-    </label>
-    <button id="showBtn" type="button">Show</button>
-    <button id="resetBtn" type="button">Reset</button>
-  </form>
-
-  <div id="result" aria-live="polite"></div>
-  <div class="notice">Tip: you can also open this page as <code>practice4.html?n=12</code> to prefill the value.</div>
-
-  <script>
-    // Utility: read 'n' from querystring if present
-    function readQueryN() {
-      const params = new URLSearchParams(window.location.search);
-      if (!params.has('n')) return null;
-      const v = parseInt(params.get('n'), 10);
-      return Number.isNaN(v) ? null : v;
+<form method="post">
+  Enter a number: <input type="number" name="num">
+  <input type="submit" value="Generate">
+</form>
+<?php
+if(isset($_POST["num"])){
+  $n = intval($_POST["num"]);
+  echo "<table>";
+  echo "<tr><th>*</th>";
+  for($i=1;$i<=$n;$i++) echo "<th>$i</th>";
+  echo "</tr>";
+  for($i=1;$i<=$n;$i++){
+    echo "<tr><th>$i</th>";
+    for($j=1;$j<=$n;$j++){
+      echo "<td>".($i*$j)."</td>";
     }
-
-    const nInput = document.getElementById('nInput');
-    const showBtn = document.getElementById('showBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const result = document.getElementById('result');
-
-    // Safety caps
-    const DEFAULT_N = 10;
-    const MAX_N = 100;
-    const MIN_N = 1;
-
-    // Initialize input from querystring or default
-    const qn = readQueryN();
-    if (qn !== null) {
-      nInput.value = qn;
-    } else {
-      nInput.value = DEFAULT_N;
-    }
-
-    function sanitizeN(raw) {
-      let n = parseInt(raw, 10);
-      if (Number.isNaN(n)) n = DEFAULT_N;
-      if (n < MIN_N) n = MIN_N;
-      if (n > MAX_N) n = MAX_N;
-      return n;
-    }
-
-    function buildTable(n) {
-      // Build an HTML table string with headers
-      let html = '';
-      html += '<table aria-label="multiplication table">';
-      // header row
-      html += '<thead><tr><th>x</th>';
-      for (let c = 1; c <= n; c++) {
-        html += '<th>' + c + '</th>';
-      }
-      html += '</tr></thead>';
-      // body rows
-      html += '<tbody>';
-      for (let r = 1; r <= n; r++) {
-        html += '<tr>';
-        html += '<th>' + r + '</th>';
-        for (let c = 1; c <= n; c++) {
-          html += '<td>' + (r * c) + '</td>';
-        }
-        html += '</tr>';
-      }
-      html += '</tbody></table>';
-      return html;
-    }
-
-    function showTable() {
-      const n = sanitizeN(nInput.value);
-      // if user requested > MAX_N, show a warning
-      if (nInput.value > MAX_N) {
-        result.innerHTML = '<p style="color:crimson">Requested value exceeded maximum (' + MAX_N + '). Showing table up to ' + MAX_N + ' instead.</p>';
-      } else {
-        result.innerHTML = '';
-      }
-      result.innerHTML += buildTable(n);
-      // update the URL query param (without reloading) so linkable
-      const url = new URL(window.location);
-      url.searchParams.set('n', String(n));
-      window.history.replaceState({}, '', url);
-    }
-
-    showBtn.addEventListener('click', showTable);
-    resetBtn.addEventListener('click', () => {
-      nInput.value = DEFAULT_N;
-      showTable();
-      // remove n param from URL
-      const url = new URL(window.loc
+    echo "</tr>";
+  }
+  echo "</table>";
+}
+?>
+</body>
+</html>
 
