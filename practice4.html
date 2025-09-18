@@ -2,29 +2,17 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Multiplication Table Generator</title>
+  <title>Square Multiplication Table</title>
 </head>
 <body>
-  <h1>Multiplication Table Generator</h1>
+  <h1>Square Multiplication Table</h1>
   <form action="table.php" method="post">
-    <label>Minimum Multiplicand:
-      <input type="number" name="min_multiplicand" required>
-    </label><br><br>
-
-    <label>Maximum Multiplicand:
-      <input type="number" name="max_multiplicand" required>
-    </label><br><br>
-
-    <label>Minimum Multiplier:
-      <input type="number" name="min_multiplier" required>
-    </label><br><br>
-
-    <label>Maximum Multiplier:
-      <input type="number" name="max_multiplier" required>
-    </label><br><br>
-
+    <label>Size of the multiplication table:
+      <input type="number" name="size" min="1" required>
+    </label>
     <input type="submit" value="Generate Table">
   </form>
 </body>
 </html>
+
 
