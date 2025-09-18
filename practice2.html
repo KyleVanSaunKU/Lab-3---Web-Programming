@@ -1,66 +1,34 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8" />
-  <title>Practice 2 — CSS Font Control</title>
+  <title>CSS Controller</title>
   <style>
-    #box {
-      border: 4px solid rgb(0,0,0);
-      padding: 1rem;
-      width: 60%;
-      min-width: 200px;
+    #textBox {
+      border: 4px solid black;
+      padding: 10px;
+      width: 400px;
     }
-    label { display:block; margin-top: 0.5rem; }
   </style>
 </head>
 <body>
-  <h1>Practice 2 — CSS Font Control</h1>
+  <p id="textBox">Change my color and border width!</p>
 
-  <div id="box">
-    <p id="text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Use the controls below to change this paragraph's color and the border width.</p>
-  </div>
-
-  <form id="controls" onsubmit="return false;">
-    <label>RGB (enter as R,G,B — e.g., <code>255,0,0</code> for red):
-      <input type="text" id="rgbInput" placeholder="R,G,B" value="0,0,0">
-    </label>
-
-    <label>Border width (px):
-      <input type="number" id="borderWidth" value="4" min="0" max="200">
-    </label>
-
-    <button id="applyBtn">Apply</button>
-    <button id="resetBtn" type="button">Reset</button>
-  </form>
+  <label>Red: <input type="number" id="r" min="0" max="255"></label>
+  <label>Green: <input type="number" id="g" min="0" max="255"></label>
+  <label>Blue: <input type="number" id="b" min="0" max="255"></label>
+  <label>Border Width(px): <input type="number" id="w" min="0"></label>
+  <button onclick="updateCSS()">Apply</button>
 
   <script>
-    const rgbInput = document.getElementById('rgbInput');
-    const borderWidth = document.getElementById('borderWidth');
-    const applyBtn = document.getElementById('applyBtn');
-    const resetBtn = document.getElementById('resetBtn');
-    const text = document.getElementById('text');
-    const box = document.getElementById('box');
-
-    function applyStyles() {
-      const rgb = rgbInput.value.split(',').map(s => parseInt(s.trim(),10));
-      if (rgb.length === 3 &&
-          rgb.every(n => !isNaN(n) && n >= 0 && n <= 255)) {
-        text.style.color = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-        box.style.border = `${parseInt(borderWidth.value,10)||0}px solid rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
-      } else {
-        alert('Please enter valid RGB values as R,G,B where each is 0–255.');
-      }
+    function updateCSS(){
+      var r=document.getElementById("r").value;
+      var g=document.getElementById("g").value;
+      var b=document.getElementById("b").value;
+      var w=document.getElementById("w").value;
+      var box=document.getElementById("textBox");
+      box.style.color="rgb("+r+","+g+","+b+")";
+      box.style.borderWidth=w+"px";
     }
-
-    applyBtn.addEventListener('click', applyStyles);
-    resetBtn.addEventListener('click', () => {
-      rgbInput.value = '0,0,0';
-      borderWidth.value = 4;
-      applyStyles();
-    });
-
-    // initialize
-    applyStyles();
   </script>
 </body>
 </html>
