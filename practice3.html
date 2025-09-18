@@ -1,51 +1,27 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8" />
-  <title>Practice 3 — Password Verification</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 2rem; }
-    label { display:block; margin: .5rem 0; }
-    #message { margin-top: .5rem; font-weight: bold; }
-  </style>
+  <title>Password Check</title>
 </head>
 <body>
-  <h1>Password Verification</h1>
-
-  <form id="pwForm" onsubmit="return false;">
-    <label>Enter password:
-      <input type="password" id="pw1" autocomplete="new-password">
-    </label>
-    <label>Re-enter password:
-      <input type="password" id="pw2" autocomplete="new-password">
-    </label>
-    <button id="checkBtn">Verify</button>
-  </form>
-
-  <div id="message" aria-live="polite"></div>
+  <h3>Enter Password Twice</h3>
+  <input type="password" id="p1"><br>
+  <input type="password" id="p2"><br>
+  <button onclick="checkPass()">Verify</button>
 
   <script>
-    const pw1 = document.getElementById('pw1');
-    const pw2 = document.getElementById('pw2');
-    const checkBtn = document.getElementById('checkBtn');
-    const message = document.getElementById('message');
-
-    checkBtn.addEventListener('click', () => {
-      const a = pw1.value;
-      const b = pw2.value;
-      if (a.length < 8) {
-        message.textContent = 'Password must be at least 8 characters long.';
-        message.style.color = 'red';
-        return;
+    function checkPass(){
+      var a=document.getElementById("p1").value;
+      var b=document.getElementById("p2").value;
+      if(a.length<8){
+        alert("Password must be at least 8 characters.");
+      } else if(a!==b){
+        alert("Passwords do not match.");
+      } else{
+        alert("Passwords match!");
       }
-      if (a !== b) {
-        message.textContent = 'Passwords do not match.';
-        message.style.color = 'red';
-        return;
-      }
-      message.textContent = 'Passwords match — OK!';
-      message.style.color = 'green';
-    });
+    }
   </script>
 </body>
 </html>
+
