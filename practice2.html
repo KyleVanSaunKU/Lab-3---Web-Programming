@@ -12,24 +12,51 @@
 </head>
 <body>
   <h1>EECS 348 Lab 3 Practice 2</h1>
-  <p id="textBox">Change this texts color and border width!</p>
+  <p id="textBox">Change this text’s color, border, and background!</p>
 
-  <label>Red: <input type="number" id="r" min="0" max="255"></label><br>
-  <label>Green: <input type="number" id="g" min="0" max="255"></label><br>
-  <label>Blue: <input type="number" id="b" min="0" max="255"></label><br>
-  <label>Border Width(px): <input type="number" id="w" min="0"></label><br>
-  <button onclick="updateCSS()">Change the color!</button><br>
+  <!-- Text Color -->
+  <label>Text Red RGB:   <input type="number" id="r"  min="0" max="255"></label><br>
+  <label>Text Green RGB: <input type="number" id="g"  min="0" max="255"></label><br>
+  <label>Text Blue RGB:  <input type="number" id="b"  min="0" max="255"></label><br><br>
+
+  <!-- Border Color -->
+  <label>Border Red RGB:   <input type="number" id="br" min="0" max="255"></label><br>
+  <label>Border Green RGB: <input type="number" id="bg" min="0" max="255"></label><br>
+  <label>Border Blue RGB:  <input type="number" id="bb" min="0" max="255"></label><br><br>
+
+  <!-- Background Color -->
+  <label>Background Red RGB:   <input type="number" id="cr" min="0" max="255"></label><br>
+  <label>Background Green RGB: <input type="number" id="cg" min="0" max="255"></label><br>
+  <label>Background Blue RGB:  <input type="number" id="cb" min="0" max="255"></label><br><br>
+
+  <!-- Border Width -->
+  <label>Border Width (px): <input type="number" id="w" min="0"></label><br><br>
+
+  <button onclick="updateCSS()">Apply Changes</button><br>
 
   <script>
     function updateCSS(){
-      var r=document.getElementById("r").value;
-      var g=document.getElementById("g").value;
-      var b=document.getElementById("b").value;
-      var w=document.getElementById("w").value;
-      var box=document.getElementById("textBox");
-      box.style.color="rgb("+r+","+g+","+b+")";
-      box.style.borderWidth=w+"px";
+      var r  = document.getElementById("r").value;
+      var g  = document.getElementById("g").value;
+      var b  = document.getElementById("b").value;
+
+      var br = document.getElementById("br").value;
+      var bg = document.getElementById("bg").value;
+      var bb = document.getElementById("bb").value;
+
+      var cr = document.getElementById("cr").value;
+      var cg = document.getElementById("cg").value;
+      var cb = document.getElementById("cb").value;
+
+      var w  = document.getElementById("w").value;
+
+      var box = document.getElementById("textBox");
+      box.style.color           = "rgb("+r+","+g+","+b+")";
+      box.style.borderColor     = "rgb("+br+","+bg+","+bb+")";
+      box.style.backgroundColor = "rgb("+cr+","+cg+","+cb+")";
+      box.style.borderWidth     = w + "px";
     }
   </script>
 </body>
 </html>
+
