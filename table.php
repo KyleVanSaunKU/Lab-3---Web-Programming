@@ -1,38 +1,30 @@
 <?php
-// Grab the posted numbers
-$min_multiplicand = $_POST['min_multiplicand'];
-$max_multiplicand = $_POST['max_multiplicand'];
-$min_multiplier   = $_POST['min_multiplier'];
-$max_multiplier   = $_POST['max_multiplier'];
+$size = $_POST['size'];
 
-// Basic validation
-if (!is_numeric($min_multiplicand) || !is_numeric($max_multiplicand) ||
-    !is_numeric($min_multiplier) || !is_numeric($max_multiplier)) {
-    die("All inputs must be numbers.");
+// Validate
+if (!is_numeric($size) || $size < 1) {
+    die("Please enter a positive number.");
 }
-if ($min_multiplicand > $max_multiplicand || $min_multiplier > $max_multiplier) {
-    die("Minimum values must be less than or equal to maximum values.");
-}
+$size = (int)$size;
 
-// Start output
-echo "<h1>Multiplication Table</h1>";
+// Output table
+echo "<h1>{$size} × {$size} Multiplication Table</h1>";
 echo "<table border='1' cellpadding='5'>";
 
-// First row header
+// Header row
 echo "<tr><th></th>";
-for ($i = $min_multiplier; $i <= $max_multiplier; $i++) {
+for ($i = 1; $i <= $size; $i++) {
     echo "<th>$i</th>";
 }
 echo "</tr>";
 
-// Table body
-for ($row = $min_multiplicand; $row <= $max_multiplicand; $row++) {
+// Rows
+for ($row = 1; $row <= $size; $row++) {
     echo "<tr><th>$row</th>";
-    for ($col = $min_multiplier; $col <= $max_multiplier; $col++) {
+    for ($col = 1; $col <= $size; $col++) {
         echo "<td>" . ($row * $col) . "</td>";
     }
     echo "</tr>";
 }
-
 echo "</table>";
 ?>
